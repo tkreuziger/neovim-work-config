@@ -9,7 +9,7 @@ return {
         end,
         opts = {
             flavour = 'mocha',
-            transparent_background = true,
+            transparent_background = false,
             show_end_of_buffer = false,
             term_colors = true,
             no_italic = false,
