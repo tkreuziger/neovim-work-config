@@ -67,3 +67,6 @@ keymap("n", "<leader>sm", ":Mason<CR>", get_opts("Mason"))
 -- LSP
 keymap("n", "<leader>li", ":LspInfo<CR>", get_opts("Info"))
 
+-- Terminal
+keymap("n", "<leader>st", ":terminal<CR>", get_opts("Terminal"))
+keymap("t", "<esc>", "<C-\\><C-n>", get_opts("Terminal"))
