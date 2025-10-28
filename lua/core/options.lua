@@ -59,9 +59,29 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.backspace = 'indent,eol,start'
 
 -- Enable folding.
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = 'syntax'
-vim.opt.fillchars = { fold = " " }
+vim.opt.foldlevel = 0
+vim.opt.foldmethod = 'indent'
+vim.opt.fillchars = { fold = " ", vert = "|", eob = " " }
+
+-- Define a custom fold text function in Lua
+function _G.CustomFoldText()
+  local line = vim.trim(vim.fn.getline(vim.v.foldstart))
+  local folded_line_num = vim.v.foldend - vim.v.foldstart
+  local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80  -- fallback to 80 if textwidth is 0
+  local fillcharcount = textwidth - #line - tostring(folded_line_num):len() - 8
+
+  if fillcharcount < 0 then
+    fillcharcount = 0
+  end
+
+  return '+' .. string.rep('-', 2)
+    .. ' ' .. line .. ' '
+    .. string.rep('.', fillcharcount)
+    .. ' (' .. folded_line_num .. ')'
+end
+
+-- Set foldtext to use the Lua function
+vim.opt.foldtext = 'v:lua.CustomFoldText()'
 
 -- Disable folding at startup.
 vim.opt.foldenable = false
