@@ -35,6 +35,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<leader>wv", "<C-w>v", get_opts("Split vertically"))
 keymap("n", "<leader>ws", "<C-w>s", get_opts("Split horizontally"))
 keymap("n", "<leader>wd", ":q<CR>", get_opts("Close"))
+keymap("n", "<leader>wx", "<C-w>x", get_opts("Swap"))
 
 -- Clear highlights
 keymap("n", "<esc>", "<cmd>nohlsearch<CR>", opts)
@@ -70,3 +71,14 @@ keymap("n", "<leader>li", ":LspInfo<CR>", get_opts("Info"))
 -- Terminal
 keymap("n", "<leader>st", ":terminal<CR>", get_opts("Terminal"))
 keymap("t", "<esc>", "<C-\\><C-n>", get_opts("Terminal"))
+
+-- Fileviewer
+keymap("n", "<leader>fe", ":Neotree float<CR>", get_opts("Fileviewer"))
+
+-- Telescope
+vim.api.nvim_create_user_command("TelescopeModifiedBuffers", function()
+  require("core.telescope_picker").modified_buffers()
+end, {})
+
+keymap("n", "<leader>bm", "<cmd>TelescopeModifiedBuffers<cr>", get_opts("Modified buffers"))
+keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("Modified buffers"))

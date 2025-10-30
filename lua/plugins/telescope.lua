@@ -79,13 +79,6 @@ return {
                 desc = 'Fuzzy here',
             },
             { '<leader>fm', '<cmd>Telescope marks<cr>', desc = 'Marks' },
-
-            {
-                '<leader>fe',
-                '<cmd>Telescope file_browser<cr>',
-                desc = 'File browser',
-            },
-
             {
                 '<leader>gl',
                 '<cmd>Telescope git_commits<cr>',
@@ -99,9 +92,6 @@ return {
             },
 
             { '<leader>shk', '<cmd>Telescope keymaps<cr>', desc = 'Key Maps' },
-            -- { '<leader>shh', '<cmd>Telescope help_tags<cr>', desc = 'Help Pages' },
-            -- { '<leader>shm', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
-
             {
                 '<leader>so',
                 '<cmd>Telescope vim_options<cr>',
