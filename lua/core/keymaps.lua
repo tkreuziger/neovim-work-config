@@ -41,7 +41,6 @@ keymap("n", "<leader>wx", "<C-w>x", get_opts("Swap"))
 keymap("n", "<esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Buffers
-keymap("n", "<leader>bd", ":bd<CR>", get_opts("Close"))
 keymap("n", "<leader>bs", ":w<CR>", get_opts("Save"))
 
 -- Exit neovim
@@ -54,6 +53,8 @@ keymap("n", "<leader>pp", ":NeovimProjectDiscover<CR>", get_opts("Discover"))
 local snacks = require("snacks")
 keymap("n", "<leader>nn", snacks.notifier.show_history, get_opts("History"))
 keymap("n", "<leader>nx", snacks.notifier.hide, get_opts("Hide"))
+
+keymap("n", "<leader>bd", snacks.bufdelete.delete, get_opts("Close"))
 
 -- Tabs
 keymap("n", "<leader>yn", ":tabnew<CR>", get_opts("New tab"))
