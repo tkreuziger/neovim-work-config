@@ -159,6 +159,3 @@ for server, settings in pairs(servers) do
     vim.lsp.enable(server)
 end
 
-return {
-    server_names = get_keys(servers),
-}
