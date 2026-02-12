@@ -82,4 +82,4 @@ vim.api.nvim_create_user_command("TelescopeModifiedBuffers", function()
 end, {})
 
 keymap("n", "<leader>bm", "<cmd>TelescopeModifiedBuffers<cr>", get_opts("Modified buffers"))
-keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("Modified buffers"))
+keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("All buffers"))
