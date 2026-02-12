@@ -145,29 +145,19 @@ local function lsp_on_attach(client, bufnr)
     silent_nmap('<leader>dl', vim.diagnostic.setloclist, 'List')
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.offsetEncoding = { "utf-16" }
-vim.lsp.config('*', {
-    capabilities = capabilities,
-})
 
-for server in pairs(servers) do
-    vim.lsp.config[server] = {
-        settings = servers[server],
-    }
+for server, settings in pairs(servers) do
+    vim.lsp.config(server, {
+        settings = settings,
+        capabilities = capabilities,
+        on_attach = lsp_on_attach,
+    })
+
+    vim.lsp.enable(server)
 end
-
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('my.lsp', {}),
-    callback = function(args)
-        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-        local bufnr = args.buf
-
-        lsp_on_attach(client, bufnr)
-    end
-})
 
 return {
     server_names = get_keys(servers),
