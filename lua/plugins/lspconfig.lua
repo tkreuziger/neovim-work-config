@@ -21,15 +21,6 @@ return {
     },
 
     {
-        'williamboman/mason-lspconfig.nvim',
-        enabled = true,
-        opts = {
-            ensure_installed = require('core.lsp').server_names,
-            automatic_enable = true,
-        },
-    },
-
-    {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         enabled = true,
         opts = {
