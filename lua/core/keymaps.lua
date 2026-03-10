@@ -23,8 +23,8 @@ keymap('i', '<C-k>', '<Up>')
 keymap('i', '<C-l>', '<Right>')
 
 -- Keep cursor centered when jumping.
-keymap('n', '<C-u>', '<C-u>zz')
-keymap('n', '<C-d>', '<C-d>zz')
+-- keymap('n', '<C-u>', '<C-u>zz')
+-- keymap('n', '<C-d>', '<C-d>zz')
 
 -- Windows
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -45,9 +45,6 @@ keymap("n", "<leader>bs", ":w<CR>", get_opts("Save"))
 
 -- Exit neovim
 keymap("n", "<leader>qq", ":qa<CR>", get_opts("Quit neovim"))
-
--- Projects
-keymap("n", "<leader>pp", ":NeovimProjectDiscover<CR>", get_opts("Discover"))
 
 -- Snacks
 local snacks = require("snacks")
@@ -83,3 +80,9 @@ end, {})
 
 keymap("n", "<leader>bm", "<cmd>TelescopeModifiedBuffers<cr>", get_opts("Modified buffers"))
 keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("All buffers"))
+
+-- Diagnostics.
+keymap("n", '<leader>df', vim.diagnostic.open_float, get_opts('Float'))
+keymap("n", '<leader>dk', vim.diagnostic.get_prev, get_opts('Previous issue'))
+keymap("n", '<leader>dj', vim.diagnostic.get_next, get_opts('Next issue'))
+keymap("n", '<leader>dl', vim.diagnostic.setloclist, get_opts('List'))

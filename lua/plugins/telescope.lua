@@ -39,7 +39,6 @@ return {
             },
             {
                 '<leader>ff',
-                --'<cmd>Telescope find_files hidden=true<cr>',
                 custom_find_files,
                 desc = 'All files',
             },

@@ -200,3 +200,5 @@ end
 -- Call function on startup to set default value
 ResetGuiFont()
 
+-- Read file if changed.
+vim.o.autoread = true

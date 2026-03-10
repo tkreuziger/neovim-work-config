@@ -205,41 +205,5 @@ return {
                 },
             },
         },
-        config = function(_, opts)
-            local ts_repeat_move =
-                require('nvim-treesitter.textobjects.repeatable_move')
-
-            local mode = { 'n', 'x', 'o' }
-            vim.keymap.set(mode, ';', ts_repeat_move.repeat_last_move_next)
-            vim.keymap.set(mode, ',', ts_repeat_move.repeat_last_move_previous)
-
-            -- Make builtin f, F, t, T also repeatable with ; and ,
-            vim.keymap.set(
-                mode,
-                'f',
-                ts_repeat_move.builtin_f_expr,
-                { expr = true }
-            )
-            vim.keymap.set(
-                mode,
-                'F',
-                ts_repeat_move.builtin_F_expr,
-                { expr = true }
-            )
-            vim.keymap.set(
-                mode,
-                't',
-                ts_repeat_move.builtin_t_expr,
-                { expr = true }
-            )
-            vim.keymap.set(
-                mode,
-                'T',
-                ts_repeat_move.builtin_T_expr,
-                { expr = true }
-            )
-
-            require('nvim-treesitter.configs').setup(opts)
-        end,
     },
 }

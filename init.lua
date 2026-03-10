@@ -6,5 +6,7 @@ require("core.autocmds")
 
 require("core.lazy")
 
+require("core.lsp")
+
 -- Load keymaps last (including plugins)
 require("core.keymaps")

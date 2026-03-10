@@ -25,7 +25,8 @@ local servers = {
             hint = { enable = true, setType = true },
         },
     },
-    pyright = {},
+    basedpyright = {},
+    ruff = {},
 }
 
 local float = require('core.defaults').diagnostics_options.float
@@ -116,6 +117,9 @@ local function lsp_on_attach(client, bufnr)
 
     if client.server_capabilities.documentSymbolProvider then
         nmap('<leader>lrs', telescope.lsp_document_symbols, 'Document symbols')
+
+        local navic = require("nvim-navic")
+        navic.attach(client, bufnr)
     end
 
     if client.server_capabilities.workspaceSymbolProvider then
@@ -127,22 +131,8 @@ local function lsp_on_attach(client, bufnr)
     end
 
     if client.supports_method('textDocument/formatting') then
-        nmap('<leader>lf', vim.lsp.buf.format, 'Format')
+        nmap('<leader>lf', vim.lsp.buf.format, 'Format buffer')
     end
-
-    local silent_nmap = function(keys, func, desc)
-        vim.keymap.set(
-            'n',
-            keys,
-            func,
-            { buffer = bufnr, desc = desc, noremap = true, silent = true }
-        )
-    end
-
-    silent_nmap('<leader>df', vim.diagnostic.open_float, 'Float')
-    silent_nmap('<leader>dk', vim.diagnostic.get_prev, 'Previous issue')
-    silent_nmap('<leader>dj', vim.diagnostic.get_next, 'Next issue')
-    silent_nmap('<leader>dl', vim.diagnostic.setloclist, 'List')
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

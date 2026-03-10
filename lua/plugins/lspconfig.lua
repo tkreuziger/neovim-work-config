@@ -28,7 +28,7 @@ return {
                 'stylua',
                 'selene',
                 'ruff',
-                'pyright',
+                'basedpyright',
                 'mypy',
                 'debugpy',
                 'hadolint',

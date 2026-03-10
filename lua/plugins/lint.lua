@@ -1,5 +1,3 @@
-vim.g.linting_enabled = true
-
 return {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -42,10 +40,10 @@ return {
 
         vim.keymap.set('n', '<leader>ll', function()
             lint.try_lint()
-        end, { desc = 'Lint file' })
+        end, { desc = 'Lint buffer' })
         vim.keymap.set(
             'n',
-            '<leader>ll',
+            '<leader>lL',
             toggle_lint,
             { desc = 'Toggle linting' }
         )
