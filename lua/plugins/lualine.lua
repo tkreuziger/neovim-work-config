@@ -26,7 +26,7 @@ end
 
 local function buf_modified(buf)
     if vim.bo[buf].modified then
-        return " [+] "
+        return "[+] "
     else
         return ''
     end
