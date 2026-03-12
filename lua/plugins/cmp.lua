@@ -76,21 +76,20 @@ return {
                 window = {
                     completion = {
                         border = diagnostics_options.float.border,
+                        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+                        col_offset = -4,
+                        side_padding = 0,
                     },
                     documentation = {
                         border = diagnostics_options.float.border,
                     },
                 },
                 formatting = {
+                    fields = { "icon", "abbr", "kind", "menu" },
                     format = function(entry, vim_item)
-                        vim_item.kind = string.format(
-                            '%s %s',
-                            icons[vim_item.kind],
-                            vim_item.kind
-                        )
-
-                        vim_item.menu = cmp_sources[entry.source.name]
-
+                        vim_item.icon = " " .. icons[vim_item.kind]
+                        vim_item.kind = "   (" .. (vim_item.kind or "") .. ")"
+                        vim_item.menu = "   " .. (cmp_sources[entry.source.name] or "")
                         return vim_item
                     end,
                 },
