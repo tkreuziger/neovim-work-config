@@ -10,3 +10,4 @@ require("core.lsp")
 
 -- Load keymaps last (including plugins)
 require("core.keymaps")
+require("core.styles")

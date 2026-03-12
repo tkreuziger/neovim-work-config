@@ -1,3 +1,16 @@
+local function str_split(inputstr, sep)
+   if sep == nil then
+      sep = '%s'
+   end
+   local t = {}
+
+   for str in inputstr:gmatch('([^'..sep..']+)') do
+      table.insert(t, str)
+   end
+
+   return t
+end
+
 local function total_num_lines()
     return vim.api.nvim_buf_line_count(0)
 end
@@ -26,17 +39,28 @@ end
 
 local function buf_modified(buf)
     if vim.bo[buf].modified then
-        return "[+] "
+        return " [+]"
     else
-        return ''
+        return ""
     end
 end
 
 local function breadcrumbs()
     local navic = require("nvim-navic")
-    local filename = vim.fn.expand("%"):gsub("/", " > ")
-    if filename:sub(1, 3) == " > " then
-        filename = filename:sub(4)
+    local filename = vim.fn.expand("%")
+    local parts = str_split(filename, "/")
+
+    local result = "%#@comment#"
+    for k, v in ipairs(parts) do
+        if k ~= 1 then
+            result = result .. " > "
+        end
+
+        if k == #parts then
+            result = result .. "%*%#LualineBoldPart#" .. v .. buf_modified(0) .. "%*"
+        else
+            result = result .. v
+        end
     end
 
     local bc = ""
@@ -45,12 +69,10 @@ local function breadcrumbs()
     end
 
     if bc ~= "" then
-        bc = filename .. " > " .. bc
+        return result .. " > " .. bc
     else
-        bc = filename
+        return result
     end
-
-    return buf_modified(0) .. bc
 end
 
 return {
