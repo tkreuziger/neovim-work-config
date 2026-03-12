@@ -22,10 +22,6 @@ keymap('i', '<C-j>', '<Down>')
 keymap('i', '<C-k>', '<Up>')
 keymap('i', '<C-l>', '<Right>')
 
--- Keep cursor centered when jumping.
--- keymap('n', '<C-u>', '<C-u>zz')
--- keymap('n', '<C-d>', '<C-d>zz')
-
 -- Windows
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -86,3 +82,7 @@ keymap("n", '<leader>df', vim.diagnostic.open_float, get_opts('Float'))
 keymap("n", '<leader>dk', vim.diagnostic.get_prev, get_opts('Previous issue'))
 keymap("n", '<leader>dj', vim.diagnostic.get_next, get_opts('Next issue'))
 keymap("n", '<leader>dl', vim.diagnostic.setloclist, get_opts('List'))
+
+-- Ignore files.
+keymap("n", '<leader>gi', ":e .gitignore<CR>", get_opts('Open .gitignore'))
+keymap("n", '<leader>fi', ":e .ignore<CR>", get_opts('Open .ignore'))
