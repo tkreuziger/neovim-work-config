@@ -3,14 +3,6 @@
 
 local modified_symbol = ''
 
-local function buf_modified(buf)
-    if vim.bo[buf].modified then
-        return modified_symbol
-    else
-        return ''
-    end
-end
-
 local function tab_modified(tab)
     local wins = require('tabby.module.api').get_tab_wins(tab)
     for _, x in pairs(wins) do
@@ -19,6 +11,12 @@ local function tab_modified(tab)
         end
     end
     return ''
+end
+
+local utils = require("core.utils")
+local function getcwd()
+    local parts = utils.str_split(vim.fn.getcwd(), "/")
+    return parts[#parts]
 end
 
 return {
@@ -34,14 +32,21 @@ return {
                         style = 'bold',
                     },
                     not_current = {
-                        fg = '#5b6078',
+                        fg = '#dddddd',
                         -- bg = 'transparent',
                     },
                     fill = {
                         -- bg = 'transparent',
                     },
+                    marker = {
+                        fg = "#000000",
+                        bg = "#89b4fa",
+                    },
                 }
                 return {
+                    {
+                        { '  ' .. getcwd() .. "  ", hl = theme.marker },
+                    },
                     line.tabs().foreach(function(tab)
                         local hl = tab.is_current() and theme.current
                             or theme.not_current
