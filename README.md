@@ -5,9 +5,9 @@ My neovim config in a work setting. Tested on Windows and MacOS.
 ## Requirements
 
 - neovim (_duh_) v0.11+ (earlier versions might work, not tested)
-- A [Nerdtree Font](https://www.nerdfonts.com/) of your liking
-- fd
-- ripgrep
+- A [Nerdtree Font](https://www.nerdfonts.com/) to your liking
+- [fd](https://github.com/sharkdp/fd) (a simple, fast, and user-friendly alternative to 'find')
+- [ripgrep](https://github.com/BurntSushi/ripgrep) (recursively searches directories for a regex pattern)
 - pip & npm (for installing LSPs etc.)
 
 ## Install
