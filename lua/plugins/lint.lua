@@ -1,17 +1,18 @@
+vim.g.linting_enabled = true
+
 return {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
-    opts = {
-        linters_by_ft = {
+    opts = {},
+    config = function()
+        local lint = require('lint')
+        lint.linters_by_ft = {
             lua = { 'selene' },
-            python = { 'ruff', 'mypy' },
+            python = { 'mypy' },
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             yaml = { 'yamllint' },
-        },
-    },
-    config = function()
-        local lint = require('lint')
+        }
 
         local lint_augroup =
             vim.api.nvim_create_augroup('lint', { clear = true })
@@ -41,6 +42,9 @@ return {
         vim.keymap.set('n', '<leader>ll', function()
             lint.try_lint()
         end, { desc = 'Lint buffer' })
+        vim.keymap.set('n', '<leader>lC', function()
+            vim.diagnostic.reset(nil, 0)
+        end, { desc = 'Clear linter messages' })
         vim.keymap.set(
             'n',
             '<leader>lL',
