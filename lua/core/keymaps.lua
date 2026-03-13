@@ -32,6 +32,7 @@ keymap("n", "<leader>wv", "<C-w>v", get_opts("Split vertically"))
 keymap("n", "<leader>ws", "<C-w>s", get_opts("Split horizontally"))
 keymap("n", "<leader>wd", ":q<CR>", get_opts("Close"))
 keymap("n", "<leader>wx", "<C-w>x", get_opts("Swap"))
+keymap("n", "<leader>ww", "<C-w>w", get_opts("Switch"))
 
 -- Clear highlights
 keymap("n", "<esc>", "<cmd>nohlsearch<CR>", opts)
