@@ -3,64 +3,48 @@ local finders = require("telescope.finders")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
+local previewers = require("telescope.previewers")
+local make_entry = require("telescope.make_entry")
 
 local M = {}
 
-function M.modified_buffers(opts)
-  opts = opts or {}
+M.modified_buffers = function(opts)
+    opts = opts or {}
+    opts.bufnr_width = opts.bufnr_width or 3
+    opts.show_all_buffers = false
+    opts.sort_lastused = true
+    opts.sort_mru = true
 
-  -- build entries: list of tables { bufnr = <num>, name = <str> }
-  local entries = {}
-  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_valid(bufnr) then
-      local modified = vim.api.nvim_buf_get_option(bufnr, "modified")
-      local listed = vim.fn.buflisted(bufnr) == 1
-      if modified and listed then
-        local name = vim.api.nvim_buf_get_name(bufnr)
-        if name == "" then name = "[No Name]" end
-        table.insert(entries, {
-          bufnr = bufnr,
-          name = name,
-          display = string.format("%3d %s", bufnr, name),
-          ordinal = tostring(bufnr) .. " " .. name,
-        })
-      end
-    end
-  end
+    local results = {}
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 
-  if vim.tbl_isempty(entries) then
-    vim.notify("No modified buffers", vim.log.levels.INFO)
-    return
-  end
-
-  pickers.new(opts, {
-    prompt_title = "Modified Buffers",
-    finder = finders.new_table {
-      results = entries,
-      entry_maker = function(entry)
-        return {
-          value = entry,
-          ordinal = entry.ordinal,
-          display = entry.display,
-          bufnr = entry.bufnr,
-        }
-      end,
-    },
-    previewer = conf.buffer_previewer_maker,
-    sorter = conf.generic_sorter(opts),
-    attach_mappings = function(prompt_bufnr, map)
-      actions.select_default:replace(function()
-        local selection = action_state.get_selected_entry()
-        actions.close(prompt_bufnr)
-        if selection and selection.bufnr and vim.api.nvim_buf_is_valid(selection.bufnr) then
-          vim.api.nvim_set_current_buf(selection.bufnr)
-        else
-          vim.notify("Buffer not valid", vim.log.levels.WARN)
+    for _, buf in ipairs(buffers) do
+        if buf.changed == 1 then
+            table.insert(results, {
+                bufnr = buf.bufnr,
+                flag = buf.changed,
+                info = buf,
+            })
         end
-      end)
-      return true
-    end,
-  }):find()
+    end
+
+    if vim.tbl_isempty(results) then
+        vim.notify("No modified buffers.", vim.log.levels.INFO)
+        return
+    end
+
+    pickers.new(opts, {
+        prompt_title = "Modified Buffers",
+
+        finder = finders.new_table({
+            results = results,
+            entry_maker = make_entry.gen_from_buffer(opts),
+        }),
+
+        previewer = conf.grep_previewer(opts),
+        sorter = conf.generic_sorter(opts),
+    }):find()
 end
 
 return M
+
