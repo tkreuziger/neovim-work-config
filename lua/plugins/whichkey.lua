@@ -35,6 +35,7 @@ return {
                 { '<leader>y', group = 'Tabs', icon = '󰓩' },
 
                 { '<leader>l', group = 'LSP', icon = '󰧑' },
+                { '<leader>ll', group = 'Linter', icon = '' },
                 { '<leader>lp', group = 'Preview', icon = '󰍋' },
                 { '<leader>lc', group = 'Actions', icon = '' },
 

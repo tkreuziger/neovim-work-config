@@ -39,15 +39,15 @@ return {
             end
         end
 
-        vim.keymap.set('n', '<leader>ll', function()
+        vim.keymap.set('n', '<leader>lll', function()
             lint.try_lint()
         end, { desc = 'Lint buffer' })
-        vim.keymap.set('n', '<leader>lC', function()
+        vim.keymap.set('n', '<leader>llc', function()
             vim.diagnostic.reset(nil, 0)
         end, { desc = 'Clear linter messages' })
         vim.keymap.set(
             'n',
-            '<leader>lL',
+            '<leader>llt',
             toggle_lint,
             { desc = 'Toggle linting' }
         )
