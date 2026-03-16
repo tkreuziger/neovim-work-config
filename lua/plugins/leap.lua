@@ -1,5 +1,5 @@
 return {
-    'ggandor/leap.nvim',
+    'https://codeberg.org/andyg/leap.nvim',
     enabled = true,
     keys = {
         { 's', '<Plug>(leap-forward)', desc = 'Leap forward' },
