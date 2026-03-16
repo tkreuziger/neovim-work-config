@@ -3,10 +3,7 @@ return {
         'nvim-treesitter/nvim-treesitter',
         enabled = true,
         build = ':TSUpdate',
-        keys = {
-            { '<C-c>', desc = 'Increment selection' },
-            { '<bs>', desc = 'Decrement selection', mode = 'x' },
-        },
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             ensure_installed = {
                 'lua',
@@ -37,6 +34,19 @@ return {
             sync_install = true,
             auto_install = false,
             ignore_install = {},
+            autopairs = { enable = true },
+        },
+    },
+
+    {
+        'MeanderingProgrammer/treesitter-modules.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        ---@module 'treesitter-modules'
+        ---@type ts.mod.UserConfig
+        opts = {
+            fold = {
+                enable = true,
+            },
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
@@ -45,8 +55,8 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = '<C-c>',
-                    node_incremental = '<C-c>',
+                    init_selection = '<leader>c',
+                    node_incremental = '<leader>c',
                     scope_incremental = '<nop>',
                     node_decremental = '<bs>',
                 },
@@ -54,11 +64,7 @@ return {
             indent = {
                 enable = true,
             },
-            autopairs = { enable = true },
         },
-        config = function(_, opts)
-            require('nvim-treesitter.configs').setup(opts)
-        end,
     },
 
     -- Syntax aware text-objects, select, move, swap, and peek support.
