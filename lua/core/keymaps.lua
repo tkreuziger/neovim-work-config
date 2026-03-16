@@ -59,6 +59,7 @@ keymap("n", "<leader>yd", ":tabclose<CR>", get_opts("Close tab"))
 -- System
 keymap("n", "<leader>sl", ":Lazy<CR>", get_opts("Lazy"))
 keymap("n", "<leader>sm", ":Mason<CR>", get_opts("Mason"))
+keymap("n", "<leader>sc", ":checkhealth<CR>", get_opts("Health"))
 
 -- LSP
 keymap("n", "<leader>li", ":LspInfo<CR>", get_opts("Info"))
