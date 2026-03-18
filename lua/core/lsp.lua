@@ -1,13 +1,3 @@
--- Helper function to extract keys from a table.
--- TODO: move to some utils file
-local get_keys = function(t)
-    local keys = {}
-    for key, _ in pairs(t) do
-        table.insert(keys, key)
-    end
-    return keys
-end
-
 -- Used language servers.
 local servers = {
     lua_ls = {
