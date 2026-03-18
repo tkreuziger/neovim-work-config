@@ -119,10 +119,6 @@ local function lsp_on_attach(client, bufnr)
             'Workspace symbols'
         )
     end
-
-    if client.supports_method('textDocument/formatting') then
-        nmap('<leader>lf', vim.lsp.buf.format, 'Format buffer')
-    end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
