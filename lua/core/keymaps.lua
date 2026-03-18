@@ -54,6 +54,9 @@ keymap("n", "<leader>nn", snacks.notifier.show_history, get_opts("History"))
 keymap("n", "<leader>nx", snacks.notifier.hide, get_opts("Hide"))
 
 keymap("n", "<leader>bd", snacks.bufdelete.delete, get_opts("Close"))
+keymap("n", "<leader>bD", function()
+	snacks.bufdelete.delete({ force = true })
+end, get_opts("Force close"))
 
 -- Tabs
 keymap("n", "<leader>yn", ":tabnew<CR>", get_opts("New tab"))
