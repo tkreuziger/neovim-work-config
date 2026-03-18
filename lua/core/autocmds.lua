@@ -123,3 +123,31 @@ vim.api.nvim_create_autocmd("LspProgress", {
     })
   end,
 })
+
+local group = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+
+-- Enable relative numbers when appropriate
+vim.api.nvim_create_autocmd(
+  { "BufEnter", "FocusGained", "InsertLeave", "WinEnter" },
+  {
+    group = group,
+    callback = function()
+      if vim.wo.number and vim.fn.mode() ~= "i" then
+        vim.wo.relativenumber = true
+      end
+    end,
+  }
+)
+
+-- Disable relative numbers in other cases
+vim.api.nvim_create_autocmd(
+  { "BufLeave", "FocusLost", "InsertEnter", "WinLeave" },
+  {
+    group = group,
+    callback = function()
+      if vim.wo.number then
+        vim.wo.relativenumber = false
+      end
+    end,
+  }
+)
