@@ -3,8 +3,8 @@ local keymap = vim.keymap.set
 
 -- Silent keymap option
 local opts = { silent = true }
-local get_opts = function (title)
-    return { desc = title, silent = true }
+local get_opts = function(title)
+	return { desc = title, silent = true }
 end
 
 -- Remap space as leader key
@@ -12,15 +12,15 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Arrow keys.
-keymap('n', '<Up>', '<nop>')
-keymap('n', '<Down>', '<nop>')
-keymap('n', '<Left>', '<nop>')
-keymap('n', '<Right>', '<nop>')
+keymap("n", "<Up>", "<nop>")
+keymap("n", "<Down>", "<nop>")
+keymap("n", "<Left>", "<nop>")
+keymap("n", "<Right>", "<nop>")
 
-keymap('i', '<C-h>', '<Left>')
-keymap('i', '<C-j>', '<Down>')
-keymap('i', '<C-k>', '<Up>')
-keymap('i', '<C-l>', '<Right>')
+keymap("i", "<C-h>", "<Left>")
+keymap("i", "<C-j>", "<Down>")
+keymap("i", "<C-k>", "<Up>")
+keymap("i", "<C-l>", "<Right>")
 
 -- Windows
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -39,6 +39,11 @@ keymap("n", "<esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Buffers
 keymap("n", "<leader>bs", ":w<CR>", get_opts("Save"))
+
+local conform = require("conform")
+keymap("n", "<leader>bf", function()
+	conform.format({ async = true })
+end, get_opts("Format buffer"))
 
 -- Exit neovim
 keymap("n", "<leader>qq", ":qa<CR>", get_opts("Quit neovim"))
@@ -60,6 +65,9 @@ keymap("n", "<leader>yd", ":tabclose<CR>", get_opts("Close tab"))
 keymap("n", "<leader>sl", ":Lazy<CR>", get_opts("Lazy"))
 keymap("n", "<leader>sm", ":Mason<CR>", get_opts("Mason"))
 keymap("n", "<leader>sc", ":checkhealth<CR>", get_opts("Health"))
+keymap("n", "<leader>sn", function()
+	vim.wo.relativenumber = not vim.wo.relativenumber
+end, get_opts("Toggle line numbers"))
 
 -- LSP
 keymap("n", "<leader>li", ":LspInfo<CR>", get_opts("Info"))
@@ -73,18 +81,18 @@ keymap("n", "<leader>fe", ":Neotree float<CR>", get_opts("Fileviewer"))
 
 -- Telescope
 vim.api.nvim_create_user_command("TelescopeModifiedBuffers", function()
-  require("core.telescope_picker").modified_buffers()
+	require("core.telescope_picker").modified_buffers()
 end, {})
 
 keymap("n", "<leader>bm", "<cmd>TelescopeModifiedBuffers<cr>", get_opts("Modified buffers"))
 keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("All buffers"))
 
 -- Diagnostics.
-keymap("n", '<leader>df', vim.diagnostic.open_float, get_opts('Float'))
-keymap("n", '<leader>dk', vim.diagnostic.get_prev, get_opts('Previous issue'))
-keymap("n", '<leader>dj', vim.diagnostic.get_next, get_opts('Next issue'))
-keymap("n", '<leader>dl', vim.diagnostic.setloclist, get_opts('List'))
+keymap("n", "<leader>df", vim.diagnostic.open_float, get_opts("Float"))
+keymap("n", "<leader>dk", vim.diagnostic.get_prev, get_opts("Previous issue"))
+keymap("n", "<leader>dj", vim.diagnostic.get_next, get_opts("Next issue"))
+keymap("n", "<leader>dl", vim.diagnostic.setloclist, get_opts("List"))
 
 -- Ignore files.
-keymap("n", '<leader>gi', ":e .gitignore<CR>", get_opts('Open .gitignore'))
-keymap("n", '<leader>fi', ":e .ignore<CR>", get_opts('Open .ignore'))
+keymap("n", "<leader>gi", ":e .gitignore<CR>", get_opts("Open .gitignore"))
+keymap("n", "<leader>fi", ":e .ignore<CR>", get_opts("Open .ignore"))
