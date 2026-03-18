@@ -7,7 +7,7 @@ return {
     config = function()
         local lint = require('lint')
         lint.linters_by_ft = {
-            lua = { 'selene' },
+            -- lua = { 'selene' },
             python = { 'mypy' },
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
