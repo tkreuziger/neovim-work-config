@@ -72,6 +72,9 @@ keymap("n", "<leader>sn", function()
 	vim.wo.relativenumber = not vim.wo.relativenumber
 end, get_opts("Toggle line numbers"))
 
+local persistence = require("persistence")
+keymap("n", "<leader>ss", persistence.load, get_opts("Restore session"))
+
 -- LSP
 keymap("n", "<leader>li", ":LspInfo<CR>", get_opts("Info"))
 

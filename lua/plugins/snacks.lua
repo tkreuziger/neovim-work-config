@@ -9,7 +9,20 @@ return {
 			enabled = true,
 			preset = {
 				keys = {
-					{ icon = " ", key = "s", desc = "Last session", action = require("persistence").load },
+					-- { icon = " ", key = "s", desc = "Last session", action = require("persistence").load },
+					{
+						icon = " ",
+						key = "s",
+						desc = "Last session",
+						action = function()
+							local persistence = require("persistence")
+                            if vim.fn.filereadable(persistence.current()) == 1 then
+								persistence.load()
+                            else
+								vim.notify("No session available.", vim.log.levels.INFO)
+							end
+						end,
+					},
 					{ icon = " ", key = "f", desc = "Find File", action = "<leader>ff" },
 					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
 					{ icon = " ", key = "g", desc = "Find Text", action = "<leader>fg" },
