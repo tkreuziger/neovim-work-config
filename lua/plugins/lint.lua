@@ -10,8 +10,10 @@ return {
 			dockerfile = { "hadolint" },
 			json = { "jsonlint" },
 			yaml = { "yamllint" },
+			toml = { "tombi" },
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
+			zsh = { "shellcheck" },
 		}
 
 		vim.keymap.set("n", "<leader>lll", function()
