@@ -15,8 +15,10 @@ local servers = {
             hint = { enable = true, setType = true },
         },
     },
-    basedpyright = {},
+    -- basedpyright = {},
     ruff = {},
+    ty = {},
+    tombi = {},
 }
 
 local float = require('core.defaults').diagnostics_options.float
