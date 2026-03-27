@@ -39,6 +39,7 @@ keymap("n", "<esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Buffers
 keymap("n", "<leader>bs", ":w<CR>", get_opts("Save"))
+keymap("n", "<leader>br", ":e<CR>", get_opts("Reload"))
 
 local conform = require("conform")
 keymap("n", "<leader>bf", function()
@@ -95,10 +96,42 @@ keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", get_opts("All buffers"))
 
 -- Diagnostics.
 keymap("n", "<leader>df", vim.diagnostic.open_float, get_opts("Float"))
-keymap("n", "<leader>dk", vim.diagnostic.get_prev, get_opts("Previous issue"))
-keymap("n", "<leader>dj", vim.diagnostic.get_next, get_opts("Next issue"))
 keymap("n", "<leader>dl", vim.diagnostic.setloclist, get_opts("List"))
+keymap("n", "<leader>dW", ":Trouble diagnostics open<CR>",  get_opts("Workspace"))
 
 -- Ignore files.
 keymap("n", "<leader>gi", ":e .gitignore<CR>", get_opts("Open .gitignore"))
 keymap("n", "<leader>fi", ":e .ignore<CR>", get_opts("Open .ignore"))
+
+-- Refactor.
+local refactoring = require("refactoring")
+local refactor = refactoring.refactor
+keymap({ "n", "x" }, "<leader>rr", function()
+	refactoring.select_refactor({ prefer_ex_cmd = true })
+end, get_opts("Select"))
+vim.keymap.set({ "n", "x" }, "<leader>ref", function()
+	return refactor("Extract Function")
+end, { desc = "Function", expr = true })
+vim.keymap.set({ "n", "x" }, "<leader>reF", function()
+	return refactor("Extract Function To File")
+end, { desc = "Function to file", expr = true })
+vim.keymap.set({ "n", "x" }, "<leader>rev", function()
+	return refactor("Extract Variable")
+end, { desc = "Variable", expr = true })
+vim.keymap.set({ "n", "x" }, "<leader>reb", function()
+	return refactor("Extract Block")
+end, { desc = "Block", expr = true })
+vim.keymap.set({ "n", "x" }, "<leader>reB", function()
+	return refactor("Extract Block To File")
+end, { desc = "Block to file", expr = true })
+
+vim.keymap.set({ "n", "x" }, "<leader>rif", function()
+	return refactor("Inline Function")
+end, { desc = "Function", expr = true })
+vim.keymap.set({ "n", "x" }, "<leader>riv", function()
+	return refactor("Inline Variable")
+end, { desc = "Variable", expr = true })
+
+-- Docstrings.
+local neogen = require('neogen')
+keymap("n", "<Leader>ld", neogen.generate, get_opts("Add docstring"))

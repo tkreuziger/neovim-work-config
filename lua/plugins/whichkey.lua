@@ -46,6 +46,7 @@ return {
 
                 { '<leader>la', group = 'Actions' },
                 { '<leader>lr', group = 'Symbols' },
+                { '<leader>r', group = 'Refactor' },
             })
         end,
     },
