@@ -1,15 +1,4 @@
-local function str_split(inputstr, sep)
-   if sep == nil then
-      sep = '%s'
-   end
-   local t = {}
-
-   for str in inputstr:gmatch('([^'..sep..']+)') do
-      table.insert(t, str)
-   end
-
-   return t
-end
+local utils = require("core.utils")
 
 local function total_num_lines()
     return vim.api.nvim_buf_line_count(0)
@@ -48,7 +37,7 @@ end
 local function breadcrumbs()
     local navic = require("nvim-navic")
     local filename = vim.fn.expand("%")
-    local parts = str_split(filename, "/")
+    local parts = utils.str_split(filename, "/")
 
     local result = "%#@comment#"
     for k, v in ipairs(parts) do
