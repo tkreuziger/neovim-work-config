@@ -39,6 +39,9 @@ return {
                 { '<leader>lp', group = 'Preview', icon = '󰍋' },
                 { '<leader>lc', group = 'Actions', icon = '' },
 
+                { '<leader>c', group = 'Code', icon = '' },
+                { '<leader>cr', group = 'Refactor' },
+
                 { '<leader>g', group = 'Git' },
                 { '<leader>go', group = 'Open' },
                 { '<leader>gh', group = 'Hunks' },
@@ -46,7 +49,6 @@ return {
 
                 { '<leader>la', group = 'Actions' },
                 { '<leader>lr', group = 'Symbols' },
-                { '<leader>r', group = 'Refactor' },
             })
         end,
     },

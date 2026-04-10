@@ -107,7 +107,7 @@ keymap("n", "<leader>fi", ":e .ignore<CR>", get_opts("Open .ignore"))
 -- Refactor.
 local refactoring = require("refactoring")
 local refactor = refactoring.refactor
-keymap({ "n", "x" }, "<leader>rr", function()
+keymap({ "n", "x" }, "<leader>crr", function()
 	refactoring.select_refactor({ prefer_ex_cmd = true })
 end, get_opts("Select"))
 vim.keymap.set({ "n", "x" }, "<leader>ref", function()
@@ -135,7 +135,7 @@ end, { desc = "Variable", expr = true })
 
 -- Docstrings.
 local neogen = require('neogen')
-keymap("n", "<leader>ld", neogen.generate, get_opts("Add docstring"))
+keymap("n", "<leader>cd", neogen.generate, get_opts("Add docstring"))
 
 -- Open git repository.
 keymap("n", "<leader>goo", snacks.gitbrowse.open, get_opts("Repository"))
@@ -150,3 +150,6 @@ keymap("n", "<leader>ha", function() harpoon:list():add() end, get_opts("Add har
 
 keymap("n", "<leader>hs", function() telescope_ext.harpoon_marks(harpoon:list()) end,
     { desc = "Open harpoon window" })
+
+-- Neotest
+keymap("n", "<leader>ct", ":Neotest summary toggle", get_opts("Show tests"))
