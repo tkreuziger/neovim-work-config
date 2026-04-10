@@ -6,6 +6,9 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         opts = {
             signs = defaults.icons.git,
+            preview_config = {
+                border = "rounded",
+            },
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
 
