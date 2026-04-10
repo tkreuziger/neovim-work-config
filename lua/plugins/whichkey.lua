@@ -41,6 +41,8 @@ return {
 
                 { '<leader>c', group = 'Code', icon = '' },
                 { '<leader>cr', group = 'Refactor' },
+                { '<leader>cri', group = 'Inline' },
+                { '<leader>cre', group = 'Extract' },
 
                 { '<leader>g', group = 'Git' },
                 { '<leader>go', group = 'Open' },
