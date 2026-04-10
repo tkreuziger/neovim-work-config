@@ -16,9 +16,9 @@ return {
 						desc = "Last session",
 						action = function()
 							local persistence = require("persistence")
-                            if vim.fn.filereadable(persistence.current()) == 1 then
+							if vim.fn.filereadable(persistence.current()) == 1 then
 								persistence.load()
-                            else
+							else
 								vim.notify("No session available.", vim.log.levels.INFO)
 							end
 						end,
@@ -37,9 +37,59 @@ return {
 			},
 		},
 		explorer = { enabled = false },
-		scratch = {
+		gitbrowse = {
 			enabled = true,
+			what = "repo",
+			remote_patterns = {
+				{ "^ssh://git@([^:/]+):%d+/([^:/]+)/(.*)%.git$", "https://%1/projects/%2/repos/%3" },
+				{ "^(https?://.*)%.git$", "%1" },
+				{ "^git@(.+):(.+)%.git$", "https://%1/%2" },
+				{ "^git@(.+):(.+)$", "https://%1/%2" },
+				{ "^git@(.+)/(.+)$", "https://%1/%2" },
+				{ "^org%-%d+@(.+):(.+)%.git$", "https://%1/%2" },
+				{ "^ssh://git@(.*)$", "https://%1" },
+				{ "^ssh://([^:/]+)(:%d+)/(.*)$", "https://%1/%3" },
+				{ "^ssh://([^/]+)/(.*)$", "https://%1/%2" },
+				{ "ssh%.dev%.azure%.com/v3/(.*)/(.*)$", "dev.azure.com/%1/_git/%2" },
+				{ "^https://%w*@(.*)", "https://%1" },
+				{ "^git@(.*)", "https://%1" },
+				{ ":%d+", "" },
+				{ "%.git$", "" },
+			},
+			url_patterns = {
+				["git.rz.bankenit.de"] = {
+					branch = "/branches/{branch}",
+					file = "/blob/{branch}/{file}#L{line_start}-L{line_end}",
+					permalink = "/blob/{commit}/{file}#L{line_start}-L{line_end}",
+					commit = "/commits/{commit}",
+				},
+				["github%.com"] = {
+					branch = "/tree/{branch}",
+					file = "/blob/{branch}/{file}#L{line_start}-L{line_end}",
+					permalink = "/blob/{commit}/{file}#L{line_start}-L{line_end}",
+					commit = "/commit/{commit}",
+				},
+				["gitlab%.com"] = {
+					branch = "/-/tree/{branch}",
+					file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
+					permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
+					commit = "/-/commit/{commit}",
+				},
+				["bitbucket%.org"] = {
+					branch = "/src/{branch}",
+					file = "/src/{branch}/{file}#lines-{line_start}-L{line_end}",
+					permalink = "/src/{commit}/{file}#lines-{line_start}-L{line_end}",
+					commit = "/commits/{commit}",
+				},
+				["git.sr.ht"] = {
+					branch = "/tree/{branch}",
+					file = "/tree/{branch}/item/{file}",
+					permalink = "/tree/{commit}/item/{file}#L{line_start}",
+					commit = "/commit/{commit}",
+				},
+			},
 		},
+		scratch = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = { enabled = true },

@@ -36,8 +36,10 @@ end
 
 local function breadcrumbs()
     local navic = require("nvim-navic")
+
+    local cwd = vim.loop.cwd()
     local filename = vim.fn.expand("%")
-    local parts = utils.str_split(filename, "/")
+    local parts = utils.str_split(filename:gsub(cwd, ""), "/")
 
     local result = "%#@comment#"
     for k, v in ipairs(parts) do
@@ -79,6 +81,8 @@ return {
                     "floating",
                     "telescope",
                     "Outline",
+                    "neotest-summary",
+                    "neotest-output-panel",
                 },
                 winbar = {},
             },

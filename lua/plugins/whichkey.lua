@@ -40,7 +40,7 @@ return {
                 { '<leader>lc', group = 'Actions', icon = '' },
 
                 { '<leader>g', group = 'Git' },
-                { '<leader>gc', group = 'Commands' },
+                { '<leader>go', group = 'Open' },
                 { '<leader>gh', group = 'Hunks' },
                 { '<leader>gb', group = 'Buffer' },
 

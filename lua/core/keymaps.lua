@@ -87,8 +87,9 @@ keymap("t", "<esc>", "<C-\\><C-n>", get_opts("Terminal"))
 keymap("n", "<leader>fe", ":Neotree float<CR>", get_opts("Fileviewer"))
 
 -- Telescope
+local telescope_ext = require("core.telescope_picker")
 vim.api.nvim_create_user_command("TelescopeModifiedBuffers", function()
-	require("core.telescope_picker").modified_buffers()
+	telescope_ext.modified_buffers()
 end, {})
 
 keymap("n", "<leader>bm", "<cmd>TelescopeModifiedBuffers<cr>", get_opts("Modified buffers"))
@@ -134,4 +135,18 @@ end, { desc = "Variable", expr = true })
 
 -- Docstrings.
 local neogen = require('neogen')
-keymap("n", "<Leader>ld", neogen.generate, get_opts("Add docstring"))
+keymap("n", "<leader>ld", neogen.generate, get_opts("Add docstring"))
+
+-- Open git repository.
+keymap("n", "<leader>goo", snacks.gitbrowse.open, get_opts("Repository"))
+keymap("n", "<leader>gob", function() snacks.gitbrowse.open({ what = "branch" }) end, get_opts("Branch"))
+keymap("n", "<leader>goc", function() snacks.gitbrowse.open({ what = "commit" }) end, get_opts("Commit"))
+
+-- Harpoon.
+local harpoon = require("harpoon")
+
+keymap("n", "<leader>ha", function() harpoon:list():add() end, get_opts("Add harpoon"))
+-- keymap("n", "<leader>hs", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, get_opts("Pick harpoon"))
+
+keymap("n", "<leader>hs", function() telescope_ext.harpoon_marks(harpoon:list()) end,
+    { desc = "Open harpoon window" })

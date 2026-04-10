@@ -6,6 +6,7 @@ return {
 	config = function()
 		require("window-picker").setup({
 			hint = "floating-letter",
+            show_prompt = false,
 		})
 	end,
 }
