@@ -1,4 +1,4 @@
-local defaults = require('core.defaults')
+local defaults = require('common.defaults')
 
 return {
     {

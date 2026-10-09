@@ -28,6 +28,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		enabled = true,
+		event = "InsertEnter",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp", lazy = true },
 			{ "hrsh7th/cmp-path", lazy = true },
@@ -44,8 +45,8 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
-			local diagnostics_options = require("core.defaults").diagnostics_options
-			local icons = require("core.defaults").icons.kinds
+			local diagnostics_options = require("common.defaults").diagnostics_options
+			local icons = require("common.defaults").icons.kinds
 
 			local cmp_sources = {
 				buffer = "[Buffer]",

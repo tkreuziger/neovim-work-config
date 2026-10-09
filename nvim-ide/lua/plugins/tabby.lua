@@ -13,7 +13,7 @@ local function tab_modified(tab)
     return ''
 end
 
-local utils = require("core.utils")
+local utils = require("common.utils")
 local function getcwd()
     local parts = utils.str_split(vim.fn.getcwd(), "/")
     return parts[#parts]

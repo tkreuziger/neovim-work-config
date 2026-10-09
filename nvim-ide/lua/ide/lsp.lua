@@ -19,9 +19,10 @@ local servers = {
 	ruff = {},
 	ty = {},
 	tombi = {},
+	clangd = {},
 }
 
-local float = require("core.defaults").diagnostics_options.float
+local float = require("common.defaults").diagnostics_options.float
 
 -- Define handler for lsp attach event.
 local function lsp_on_attach(client, bufnr)

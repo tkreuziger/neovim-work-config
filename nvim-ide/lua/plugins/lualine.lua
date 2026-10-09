@@ -1,4 +1,4 @@
-local utils = require("core.utils")
+local utils = require("common.utils")
 
 local function total_num_lines()
     return vim.api.nvim_buf_line_count(0)
@@ -72,7 +72,7 @@ return {
     opts = {
         options = {
             icons_enabled = true,
-            theme = 'auto',
+            theme = 'catppuccin-nvim',
             component_separators = { left = '', right = ''},
             section_separators = { left = '', right = ''},
             disabled_filetypes = {

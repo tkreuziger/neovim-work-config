@@ -166,11 +166,11 @@ return {
             }
         end,
         init = function()
-            -- Haunt with Telescope.
-            local actions = require('telescope.actions')
-            local action_state = require('telescope.actions.state')
-
+            -- Haunt with Telescope. The requires live in the handlers so that
+            -- `init` (which runs at startup) does not force Telescope to load.
             local function open_help_in_haunt(prompt_bufnr, map)
+                local actions = require('telescope.actions')
+                local action_state = require('telescope.actions.state')
                 actions.select_default:replace(function()
                     actions.close(prompt_bufnr)
                     local selection = action_state.get_selected_entry()
@@ -180,6 +180,8 @@ return {
             end
 
             local function open_man_in_haunt(prompt_bufnr, map)
+                local actions = require('telescope.actions')
+                local action_state = require('telescope.actions.state')
                 actions.select_default:replace(function()
                     actions.close(prompt_bufnr)
                     local selection = action_state.get_selected_entry()

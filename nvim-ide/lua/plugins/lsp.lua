@@ -8,9 +8,12 @@ return {
 	{
 		"mason-org/mason.nvim",
 		enabled = true,
+		cmd = "Mason",
 		opts = {
+			-- Reuse the existing install (also on $PATH) across profiles.
+			install_root_dir = vim.fn.expand("~/.local/share/nvim/mason"),
 			ui = {
-				border = require("core.defaults").diagnostics_options.float.border,
+				border = require("common.defaults").diagnostics_options.float.border,
 				icons = {
 					package_installed = "󰸞 ",
 					package_pending = "󰜴 ",
@@ -23,6 +26,7 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		enabled = true,
+		event = "VeryLazy",
 		opts = {
 			ensure_installed = {
 				"stylua",
@@ -40,6 +44,8 @@ return {
                 "shfmt",
                 "shellcheck",
                 "tombi",
+                "clangd",
+                "clang-format",
 			},
 		},
 	},

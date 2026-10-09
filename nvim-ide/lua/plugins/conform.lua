@@ -9,6 +9,7 @@ return {
 			toml = { "tombi" },
 			sh = { "shfmt" },
 			bash = { "shfmt" },
+			c = { "clang-format" },
 		},
 	},
 }
